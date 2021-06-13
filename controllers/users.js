@@ -11,10 +11,7 @@ const {
 const { HttpCode } = require('../helpers/constatns');
 const UploadAvatar = require('../services/upload-avatars-local');
 const EmailService = require('../services/email');
-const {
-  CreateSenderNodemailer,
-  CreateSenderSendgrid,
-} = require('../services/sender-email');
+const { CreateSenderSendgrid } = require('../services/sender-email');
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 const AVATARS_OF_USERS = process.env.AVATARS_OF_USERS;
@@ -148,7 +145,7 @@ const repeatSendEmailVerify = async (req, res, next) => {
       try {
         const emailService = new EmailService(
           process.env.NODE_ENV,
-          new CreateSenderNodemailer(),
+          new CreateSenderSendgrid(),
         );
         await emailService.sendVerifyPasswordEmail(verifyToken, email);
         return res.status(HttpCode.OK).json({
