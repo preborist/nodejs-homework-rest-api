@@ -30,7 +30,7 @@ const getById = async (req, res, next) => {
       return res.status(400).json({ message: 'invalid contactId value' });
     }
     const userId = req.user.id;
-    const contact = await await getContactById(userId, req.params.contactId);
+    const contact = await getContactById(userId, req.params.contactId);
 
     if (contact) {
       return res

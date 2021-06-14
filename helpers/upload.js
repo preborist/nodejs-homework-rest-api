@@ -1,4 +1,5 @@
 const multer = require('multer');
+const { HttpCode } = require('./constatns');
 
 require('dotenv').config();
 
@@ -18,7 +19,9 @@ const upload = multer({
   limits: { fileSize: 2000000 },
   fileFilter: (req, file, cb) => {
     if (!file.mimetype.includes('image')) {
-      cb(null, false);
+      const error = new Error('Bad requst');
+      error.status = HttpCode.BAD_REQUEST;
+      cb(error);
       return;
     }
     cb(null, true);

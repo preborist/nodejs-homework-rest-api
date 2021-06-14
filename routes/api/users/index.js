@@ -5,6 +5,8 @@ const guard = require('../../../helpers/guard');
 const { schemaSignupUser } = require('./validation');
 const upload = require('../../../helpers/upload');
 
+router.get('/verify/:token', ctrl.verify);
+router.post('/verify', ctrl.repeatSendEmailVerify);
 router.post('/signup', schemaSignupUser, ctrl.signup);
 router.post('/login', schemaSignupUser, ctrl.login);
 router.post('/logout', guard, ctrl.logout);
